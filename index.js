@@ -3,10 +3,10 @@
 const { Client } = require("pg")
 
 const client = new Client({
-    user: "postgres",
+    user: "", //user postgresql
     host: "postgres_dht",
     database: "esp32",
-    password: "123456789",
+    password: "", //password postgresql
     port: 5432
 });
 
@@ -38,14 +38,14 @@ client.query(createTableQuery, (error, res) => {
 var mqtt = require('mqtt')
 var portMqtt = '1883'
 var hostMqtt = 'broker.hivemq.com'
-var clientId = "ESP32-felipe"
+var clientId = "ESP32"
 const connectUrl = `mqtt://${hostMqtt}:${portMqtt}`
 var clientMqtt = mqtt.connect(connectUrl, {
     clientId,
     clean: true,
     connectTimeout: 4000,
-    username: 'felipe', 
-    passwordMqtt: '12345',
+    username: '', //user mqtt
+    passwordMqtt: '', //password mqtt
     reconnectPeriod: 1000,
 })
 
