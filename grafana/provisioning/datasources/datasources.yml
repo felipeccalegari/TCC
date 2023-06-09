@@ -5,10 +5,10 @@ datasources:
   - name: PostgreSQL-Data
     type: postgres
     url: postgres_dht:5432
-    user: postgres
+    user: #user postgres
     isDefault: true
     secureJsonData:
-      password: "123456789"
+      password: "" #password postgres
     jsonData:
       database: esp32
       sslmode: "disable"      # disable/require/verify-ca/verify-full
