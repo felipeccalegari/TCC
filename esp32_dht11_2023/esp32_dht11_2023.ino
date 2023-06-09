@@ -11,13 +11,13 @@
 #define DHTTYPE DHT22
 
 //Credenciais Wifi
-#define ssid "Felipe_2.4G"
-#define password "99822649"
+#define ssid "" // Wifi ssid
+#define password "" //wifi password
 
 //Credenciais MQTT
 const char *mqtt_server = "broker.hivemq.com";
-const char *mqtt_user = "felipe";
-const char *mqtt_password = "12345";
+const char *mqtt_user = ""; //mqtt user
+const char *mqtt_password = ""; //mqtt password
 const int mqtt_port = 1883;
 
 //Credenciais MQTT - Tópicos
@@ -58,7 +58,7 @@ void setup() {
   //Verifica se foi conectado
   while (!client.connected()) //Enquanto não estiver conectado ao broker MQTT
   {
-    String client_id = "ESP32-felipe";
+    String client_id = "ESP32"; //client it mqtt
     client_id += String(WiFi.macAddress());
     Serial.printf("Client %s se conecta ao broker.\n", client_id.c_str());
 
