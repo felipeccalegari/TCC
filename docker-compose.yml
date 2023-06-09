@@ -9,8 +9,8 @@ services:
     # Definindo variáveis de ambiente
     container_name: postgres_dht
     environment:
-      POSTGRES_USER: postgres # Nome de usuário
-      POSTGRES_PASSWORD: 123456789 # Senha
+      POSTGRES_USER:  # Nome de usuário
+      POSTGRES_PASSWORD:  # Senha
       POSTGRES_DB: esp32 # Nome da base de dados a ser criada
       PGDATA: /var/lib/postgresql/data/DHT/
     # Expondo portas do container
@@ -29,8 +29,8 @@ services:
     # Variáveis de ambiente no qual o Node.js irá se conectar
     environment:
       POSTGRES_HOST: postgres_dht # Nome do endereço host
-      POSTGRES_USER: postgres # Nome do usuário
-      POSTGRES_PASSWORD: 123456789 # Senha
+      POSTGRES_USER:  # Nome do usuário
+      POSTGRES_PASSWORD:  # Senha
       POSTGRES_DB: esp32 # Base de dados
     restart: on-failure # Necessário pois o banco de dados pode demorar para iniciar
 
