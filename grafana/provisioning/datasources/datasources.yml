@@ -1,0 +1,19 @@
+apiVersion: 1
+
+# http://docs.grafana.org/features/datasources/postgres/#configure-the-datasource-with-provisioning
+datasources:
+  - name: PostgreSQL-Data
+    type: postgres
+    url: postgres_dht:5432
+    user: postgres
+    isDefault: true
+    secureJsonData:
+      password: "123456789"
+    jsonData:
+      database: esp32
+      sslmode: "disable"      # disable/require/verify-ca/verify-full
+      maxOpenConns: 0         # Grafana v5.4+
+      maxIdleConns: 2         # Grafana v5.4+
+      connMaxLifetime: 14400  # Grafana v5.4+
+      postgresVersion: 1200   # 903=9.3, 904=9.4, 905=9.5, 906=9.6, 1000=10
+      timescaledb: false

@@ -1,0 +1,55 @@
+# Versão do Docker Compose utilizada
+version: '3'
+
+# Especificação de cada serviço utilizado (PostgreSQL, Grafana e Node.js)
+services:
+  # Define o serviço 'postgres'
+  postgres:
+    image: postgres # Utiliza a última versão da imagem do postgresql
+    # Definindo variáveis de ambiente
+    container_name: postgres_dht
+    environment:
+      POSTGRES_USER: postgres # Nome de usuário
+      POSTGRES_PASSWORD: 123456789 # Senha
+      POSTGRES_DB: esp32 # Nome da base de dados a ser criada
+      PGDATA: /var/lib/postgresql/data/DHT/
+    # Expondo portas do container
+    ports:
+      - "5432:5432" # Mapear a porta '5432' na máquina local para a porta '5432' no container
+    # Montando volumes para o container
+    volumes:
+      - ./:/var/lib/postgresql/data # Mapear a pasta atual da máquina local para o diretório '/var/lib/postgresql/data' do container
+
+  # Define o serviço 'app'
+  app:
+    container_name: backend_nodejs # Nome do container
+    build: . # Constrói uma imagem Docker com base nos requisitos do 'Dockerfile' criado
+    volumes: 
+      - ./:/app # Mapear a pasta atual da máquina local para a pasta '/app' do container
+    # Variáveis de ambiente no qual o Node.js irá se conectar
+    environment:
+      POSTGRES_HOST: postgres_dht # Nome do endereço host
+      POSTGRES_USER: postgres # Nome do usuário
+      POSTGRES_PASSWORD: 123456789 # Senha
+      POSTGRES_DB: esp32 # Base de dados
+    restart: on-failure # Necessário pois o banco de dados pode demorar para iniciar
+
+  # Define o serviço 'grafana'
+  grafana:
+    container_name: container_grafana
+    image: grafana/grafana # Utiliza a última versão da imagem do Grafana
+    ports:
+      - "3000:3000" # Mapear a porta '3000' na máquina local para a porta '3000' no container
+    volumes:
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    # Variáveis de ambiente
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-simple-json-datasource" # Plugin a ser pré-instalado
+      GF_SECURITY_ADMIN_PASSWORD: 123456789 # Senha padrão definida, sendo o usuário padrão do grafana = admin
+
+# Expondo os volumes do Grafana para que seja acessível por outros serviços
+volumes:
+  grafana-data:
