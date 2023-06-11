@@ -47,7 +47,6 @@ services:
       - grafana-data:/var/lib/grafana
     # Variáveis de ambiente
     environment:
-      GF_INSTALL_PLUGINS: "grafana-simple-json-datasource" # Plugin a ser pré-instalado
       GF_SECURITY_ADMIN_PASSWORD: 123456789 # Senha padrão definida, sendo o usuário padrão do grafana = admin
 
 # Expondo os volumes do Grafana para que seja acessível por outros serviços
