@@ -49,6 +49,6 @@ services:
     environment:
       GF_SECURITY_ADMIN_PASSWORD: 123456789 # Senha padrão definida, sendo o usuário padrão do grafana = admin
 
-# Expondo os volumes do Grafana para que seja acessível por outros serviços
+# Expondo os volumes do Grafana
 volumes:
   grafana-data:
